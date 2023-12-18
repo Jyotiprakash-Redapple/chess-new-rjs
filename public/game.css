@@ -1,0 +1,1005 @@
+/* ====================================== Game Board Component ===============================*/
+
+.boards {
+	position: relative;
+	display: grid;
+	grid-template-columns: calc(8 * var(--tile-size));
+	grid-template-rows: calc(8 * var(--tile-size));
+	background-color: #263238;
+}
+/** 
+for white top 53px black -=65px
+**/
+.board_bg {
+	width: 365px;
+	height: 406px;
+	position: absolute;
+	/* top: -53px;
+	left: -26px; */
+	bottom: 0;
+	background-image: url("/game_play/Board.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	/* ss */
+}
+
+.tiles {
+	display: grid;
+	grid-template-columns: repeat(8, var(--tile-size));
+	grid-template-rows: repeat(8, var(--tile-size));
+	width: calc(var(8 * --tile-size));
+}
+.tile {
+	position: relative;
+}
+.tile--light {
+	/* background-image: url("/game_play/white_layer.png");
+	background-size: contain; */
+}
+.tile--dark {
+	/* background-image: url("/game_play/black_layer.png");
+	background-size: contain; */
+}
+.rank {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	color: var(--light-tiles);
+	margin-right: 25px;
+}
+
+.file {
+	grid-column: 2;
+	display: flex;
+	margin-top: 10px;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	height: calc(0.25 * var(--tile-size));
+	color: var(--light-tiles);
+}
+
+.pieces {
+	position: absolute;
+	left: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.piece {
+	cursor: pointer;
+	width: 12.5%;
+	height: 12.5%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	position: absolute;
+	cursor: pointer;
+	/* background-position: 8px -0.9px; */
+	background-position: center;
+}
+.b.highlight::after {
+	display: block;
+
+	position: absolute;
+	content: "";
+
+	width: calc(0.5 * 60px);
+	height: calc(0.5 * 60px);
+	background-color: #7e30e1;
+	border-radius: 50%;
+	left: 15%;
+	top: 21%;
+}
+.w.highlight::after {
+	display: block;
+
+	position: absolute;
+	content: "";
+	width: calc(0.5 * 59px);
+	height: calc(0.5 * 60px);
+	background-color: #7e30e1;
+	border-radius: 50%;
+	left: 8%;
+	top: 4%;
+}
+
+.b.attacking::after {
+	display: block;
+	position: absolute;
+	content: "";
+
+	border: 3px solid #ffb000;
+	width: calc(41px - 10px);
+	height: calc(40px - 10px);
+	border-radius: 50%;
+	left: 1.5px;
+	top: 3.5px;
+}
+.w.attacking::after {
+	display: block;
+	position: absolute;
+	content: "";
+
+	border: 3px solid #ffb000;
+	width: calc(40px - 10px);
+	height: calc(40px - 10px);
+	border-radius: 50%;
+	left: -1px;
+	top: -2px;
+}
+.b.checked::after {
+	display: block;
+	position: absolute;
+	content: "";
+	background-color: #ffb000;
+	/* z-index: 1; */
+	border: 3px solid #2b2a4c;
+	width: calc(41px - 10px);
+	height: calc(38px - 10px);
+	border-radius: 50%;
+	left: 2.5px;
+	top: 4.5px;
+}
+.w.checked::after {
+	display: block;
+	position: absolute;
+	content: "";
+	background-color: #ffb000;
+	/* z-index: 1; */
+	border: 3px solid #2b2a4c;
+	width: calc(41px - 10px);
+	height: calc(38px - 10px);
+	border-radius: 50%;
+	left: -1px;
+	top: -3px;
+}
+/*===============================chess board set image ======================================*/
+.piece.bk {
+	background-image: url("/game_play/bk.png");
+}
+.piece.bq {
+	background-image: url("/game_play/bq.png");
+}
+.piece.br {
+	background-image: url("/game_play/br.png");
+}
+.piece.bb {
+	background-image: url("/game_play/bb.png");
+}
+.piece.bn {
+	background-image: url("/game_play/bn.png");
+}
+.piece.bp {
+	background-image: url("/game_play/bp.png");
+}
+.piece.wk {
+	background-image: url("/game_play/wk.png");
+}
+.piece.wq {
+	background-image: url("/game_play/wq.png");
+}
+.piece.wr {
+	background-image: url("/game_play/wr.png");
+}
+.piece.wb {
+	background-image: url("/game_play/wb.png");
+}
+.piece.wn {
+	background-image: url("/game_play/wn.png");
+}
+.piece.wp {
+	background-image: url("/game_play/wp.png");
+}
+
+/*===============================chess board style move x = 100 each box======================================*/
+
+/*================================INIT============================*/
+
+/* FOR WHITE OPPONET*/
+.piece.p-b07 {
+	transform: translate(0%, 0%);
+}
+.piece.p-b17 {
+	transform: translate(100%, 0%);
+}
+.piece.p-b27 {
+	transform: translate(200%, 0%);
+}
+.piece.p-b37 {
+	transform: translate(300%, 0%);
+}
+.piece.p-b47 {
+	transform: translate(400%, 0%);
+}
+.piece.p-b57 {
+	transform: translate(500%, 0%);
+}
+.piece.p-b67 {
+	transform: translate(600%, 0%);
+}
+.piece.p-b77 {
+	transform: translate(700%, 0%);
+}
+
+.piece.p-b06 {
+	transform: translate(0%, 100%);
+}
+.piece.p-b16 {
+	transform: translate(100%, 100%);
+}
+.piece.p-b26 {
+	transform: translate(200%, 100%);
+}
+.piece.p-b36 {
+	transform: translate(300%, 100%);
+}
+.piece.p-b46 {
+	transform: translate(400%, 100%);
+}
+.piece.p-b56 {
+	transform: translate(500%, 100%);
+}
+.piece.p-b66 {
+	transform: translate(600%, 100%);
+}
+.piece.p-b76 {
+	transform: translate(700%, 100%);
+}
+
+.piece.p-b05 {
+	transform: translate(0%, 200%);
+}
+.piece.p-b15 {
+	transform: translate(100%, 200%);
+}
+.piece.p-b25 {
+	transform: translate(200%, 200%);
+}
+.piece.p-b35 {
+	transform: translate(300%, 200%);
+}
+.piece.p-b45 {
+	transform: translate(400%, 200%);
+}
+.piece.p-b55 {
+	transform: translate(500%, 200%);
+}
+.piece.p-b65 {
+	transform: translate(600%, 200%);
+}
+.piece.p-b75 {
+	transform: translate(700%, 200%);
+}
+
+.piece.p-b04 {
+	transform: translate(0%, 300%);
+}
+.piece.p-b14 {
+	transform: translate(100%, 300%);
+}
+.piece.p-b24 {
+	transform: translate(200%, 300%);
+}
+.piece.p-b34 {
+	transform: translate(300%, 300%);
+}
+.piece.p-b44 {
+	transform: translate(400%, 300%);
+}
+.piece.p-b54 {
+	transform: translate(500%, 300%);
+}
+.piece.p-b64 {
+	transform: translate(600%, 300%);
+}
+.piece.p-b74 {
+	transform: translate(700%, 300%);
+}
+
+.piece.p-b03 {
+	transform: translate(0%, 400%);
+}
+.piece.p-b13 {
+	transform: translate(100%, 400%);
+}
+.piece.p-b23 {
+	transform: translate(200%, 400%);
+}
+.piece.p-b33 {
+	transform: translate(300%, 400%);
+}
+.piece.p-b43 {
+	transform: translate(400%, 400%);
+}
+.piece.p-b53 {
+	transform: translate(500%, 400%);
+}
+.piece.p-b63 {
+	transform: translate(600%, 400%);
+}
+.piece.p-b73 {
+	transform: translate(700%, 400%);
+}
+
+.piece.p-b02 {
+	transform: translate(0%, 500%);
+}
+.piece.p-b12 {
+	transform: translate(100%, 500%);
+}
+.piece.p-b22 {
+	transform: translate(200%, 500%);
+}
+.piece.p-b32 {
+	transform: translate(300%, 500%);
+}
+.piece.p-b42 {
+	transform: translate(400%, 500%);
+}
+.piece.p-b52 {
+	transform: translate(500%, 500%);
+}
+.piece.p-b62 {
+	transform: translate(600%, 500%);
+}
+.piece.p-b72 {
+	transform: translate(700%, 500%);
+}
+
+.piece.p-b01 {
+	transform: translate(0%, 600%);
+}
+.piece.p-b11 {
+	transform: translate(100%, 600%);
+}
+.piece.p-b21 {
+	transform: translate(200%, 600%);
+}
+.piece.p-b31 {
+	transform: translate(300%, 600%);
+}
+.piece.p-b41 {
+	transform: translate(400%, 600%);
+}
+.piece.p-b51 {
+	transform: translate(500%, 600%);
+}
+.piece.p-b61 {
+	transform: translate(600%, 600%);
+}
+.piece.p-b71 {
+	transform: translate(700%, 600%);
+}
+
+.piece.p-b00 {
+	transform: translate(0%, 700%);
+}
+.piece.p-b10 {
+	transform: translate(100%, 700%);
+}
+.piece.p-b20 {
+	transform: translate(200%, 700%);
+}
+.piece.p-b30 {
+	transform: translate(300%, 700%);
+}
+.piece.p-b40 {
+	transform: translate(400%, 700%);
+}
+.piece.p-b50 {
+	transform: translate(500%, 700%);
+}
+.piece.p-b60 {
+	transform: translate(600%, 700%);
+}
+.piece.p-b70 {
+	transform: translate(700%, 700%);
+}
+
+/** For black **/
+
+.piece.p-w07 {
+	transform: translate(0%, 0%) rotate(180deg);
+}
+.piece.p-w17 {
+	transform: translate(100%, 0%) rotate(180deg);
+}
+.piece.p-w27 {
+	transform: translate(200%, 0%) rotate(180deg);
+}
+.piece.p-w37 {
+	transform: translate(300%, 0%) rotate(180deg);
+}
+.piece.p-w47 {
+	transform: translate(400%, 0%) rotate(180deg);
+}
+.piece.p-w57 {
+	transform: translate(500%, 0%) rotate(180deg);
+}
+.piece.p-w67 {
+	transform: translate(600%, 0%) rotate(180deg);
+}
+.piece.p-w77 {
+	transform: translate(700%, 0%) rotate(180deg);
+}
+
+.piece.p-w06 {
+	transform: translate(0%, 100%) rotate(180deg);
+}
+.piece.p-w16 {
+	transform: translate(100%, 100%) rotate(180deg);
+}
+.piece.p-w26 {
+	transform: translate(200%, 100%) rotate(180deg);
+}
+.piece.p-w36 {
+	transform: translate(300%, 100%) rotate(180deg);
+}
+.piece.p-w46 {
+	transform: translate(400%, 100%) rotate(180deg);
+}
+.piece.p-w56 {
+	transform: translate(500%, 100%) rotate(180deg);
+}
+.piece.p-w66 {
+	transform: translate(600%, 100%) rotate(180deg);
+}
+.piece.p-w76 {
+	transform: translate(700%, 100%) rotate(180deg);
+}
+
+.piece.p-w05 {
+	transform: translate(0%, 200%) rotate(180deg);
+}
+.piece.p-w15 {
+	transform: translate(100%, 200%) rotate(180deg);
+}
+.piece.p-w25 {
+	transform: translate(200%, 200%) rotate(180deg);
+}
+.piece.p-w35 {
+	transform: translate(300%, 200%) rotate(180deg);
+}
+.piece.p-w45 {
+	transform: translate(400%, 200%) rotate(180deg);
+}
+.piece.p-w55 {
+	transform: translate(500%, 200%) rotate(180deg);
+}
+.piece.p-w65 {
+	transform: translate(600%, 200%) rotate(180deg);
+}
+.piece.p-w75 {
+	transform: translate(700%, 200%) rotate(180deg);
+}
+
+.piece.p-w04 {
+	transform: translate(0%, 300%) rotate(180deg);
+}
+.piece.p-w14 {
+	transform: translate(100%, 300%) rotate(180deg);
+}
+.piece.p-w24 {
+	transform: translate(200%, 300%) rotate(180deg);
+}
+.piece.p-w34 {
+	transform: translate(300%, 300%) rotate(180deg);
+}
+.piece.p-w44 {
+	transform: translate(400%, 300%) rotate(180deg);
+}
+.piece.p-w54 {
+	transform: translate(500%, 300%) rotate(180deg);
+}
+.piece.p-w64 {
+	transform: translate(600%, 300%) rotate(180deg);
+}
+.piece.p-w74 {
+	transform: translate(700%, 300%) rotate(180deg);
+}
+
+.piece.p-w03 {
+	transform: translate(0%, 400%) rotate(180deg);
+}
+.piece.p-w13 {
+	transform: translate(100%, 400%) rotate(180deg);
+}
+.piece.p-w23 {
+	transform: translate(200%, 400%) rotate(180deg);
+}
+.piece.p-w33 {
+	transform: translate(300%, 400%) rotate(180deg);
+}
+.piece.p-w43 {
+	transform: translate(400%, 400%) rotate(180deg);
+}
+.piece.p-w53 {
+	transform: translate(500%, 400%) rotate(180deg);
+}
+.piece.p-w63 {
+	transform: translate(600%, 400%) rotate(180deg);
+}
+.piece.p-w73 {
+	transform: translate(700%, 400%) rotate(180deg);
+}
+
+.piece.p-w02 {
+	transform: translate(0%, 500%) rotate(180deg);
+}
+.piece.p-w12 {
+	transform: translate(100%, 500%) rotate(180deg);
+}
+.piece.p-w22 {
+	transform: translate(200%, 500%) rotate(180deg);
+}
+.piece.p-w32 {
+	transform: translate(300%, 500%) rotate(180deg);
+}
+.piece.p-w42 {
+	transform: translate(400%, 500%) rotate(180deg);
+}
+.piece.p-w52 {
+	transform: translate(500%, 500%) rotate(180deg);
+}
+.piece.p-w62 {
+	transform: translate(600%, 500%) rotate(180deg);
+}
+.piece.p-w72 {
+	transform: translate(700%, 500%) rotate(180deg);
+}
+
+.piece.p-w01 {
+	transform: translate(0%, 600%) rotate(180deg);
+}
+.piece.p-w11 {
+	transform: translate(100%, 600%) rotate(180deg);
+}
+.piece.p-w21 {
+	transform: translate(200%, 600%) rotate(180deg);
+}
+.piece.p-w31 {
+	transform: translate(300%, 600%) rotate(180deg);
+}
+.piece.p-w41 {
+	transform: translate(400%, 600%) rotate(180deg);
+}
+.piece.p-w51 {
+	transform: translate(500%, 600%) rotate(180deg);
+}
+.piece.p-w61 {
+	transform: translate(600%, 600%) rotate(180deg);
+}
+.piece.p-w71 {
+	transform: translate(700%, 600%) rotate(180deg);
+}
+
+.piece.p-w00 {
+	transform: translate(0%, 700%) rotate(180deg);
+}
+.piece.p-w10 {
+	transform: translate(100%, 700%) rotate(180deg);
+}
+.piece.p-w20 {
+	transform: translate(200%, 700%) rotate(180deg);
+}
+.piece.p-w30 {
+	transform: translate(300%, 700%) rotate(180deg);
+}
+.piece.p-w40 {
+	transform: translate(400%, 700%) rotate(180deg);
+}
+.piece.p-w50 {
+	transform: translate(500%, 700%) rotate(180deg);
+}
+.piece.p-w60 {
+	transform: translate(600%, 700%) rotate(180deg);
+}
+.piece.p-w70 {
+	transform: translate(700%, 700%) rotate(180deg);
+}
+
+/*===============================pop up Check mate ======================================*/
+.popup {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	right: 0;
+	top: 0;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: transparent;
+	background-image: url("/gameQuit/layer.png");
+}
+.popup--inner {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.popup--inner > .wins {
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+
+	background-repeat: no-repeat;
+	background-image: url("/status/win_banner.png");
+}
+.popup--inner > .defect {
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+
+	background-image: url("/status/defect_banner.png");
+}
+
+/* ===================Dectate Check==========================*/
+.check_shadow {
+	position: absolute;
+	z-index: 65;
+	width: 80%;
+	height: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url("/status/check__shadow.png");
+}
+.check_shadow > .w_check {
+	position: relative;
+	width: 90%;
+	height: 151px;
+	background-size: 230px 107px;
+	background-repeat: no-repeat;
+	background-image: url("/status/White_base.png");
+}
+.check_shadow > .b_check {
+	position: relative;
+	width: 90%;
+	height: 151px;
+	background-size: 230px 107px;
+	background-repeat: no-repeat;
+	background-image: url("/status/Black_base.png");
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.check_shadow > .w_check > p,
+.check_shadow > .b_check > p {
+	width: 60%;
+	height: 25px;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* ===================== Satalement Modal =========================*/
+
+.popup--stalemate {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	right: 0;
+	top: 0;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* background: transparent; */
+}
+.popup--stalemate > .stalemate {
+	width: 80%;
+	height: 36%;
+	background-size: 254px 103px;
+	background-repeat: no-repeat;
+	background-image: url("/status/draw_stalemate.png");
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.popup--stalemate > .stalemate h1 {
+	color: #fff;
+	font-weight: 600;
+	font-size: 1rem;
+	margin: 0 0 0.5em 0;
+}
+
+/* ========== Insufficiant mating material ====================*/
+.popup--stalemate > .insufficient {
+	width: 80%;
+	height: 36%;
+	background-size: 254px 103px;
+	background-repeat: no-repeat;
+	background-image: url("/status/draw_stalemate.png");
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.popup--stalemate > .insufficient h1 {
+	color: #fff;
+	font-weight: 600;
+	font-size: 0.5rem;
+	margin: 0 0 0.5em 0;
+}
+
+.popup--check {
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	right: 0;
+	top: 0;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.popup--inner__center {
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	padding: 1em 0;
+}
+
+.popup--inner-check {
+	width: 80%;
+	height: 30%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url("/status/check__shadow.png");
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.popup--inner .insufficient div {
+	width: 60%;
+}
+.popup--inner .insufficient div h1 {
+	color: #fff;
+	font-weight: 600;
+	font-size: 1rem;
+	margin: 0 0 0.5em 0;
+}
+
+.popup--inner__center h1 {
+	font-size: 2.5em;
+	margin: 0 0 0.5em 0;
+}
+
+.popup--inner__center p {
+	font-size: 1.2em;
+	margin: 0 0 1em 0;
+}
+
+/* ===========Promotion Style =========================*/
+.popup--prompt {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 34;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.popup--inner-prompt {
+	position: relative;
+	width: 80%;
+	height: 170px;
+
+	background-image: url("/status/Promotion_base.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.promotion-choices {
+	/* position: absolute;
+	top: 0;
+	left: 0; */
+	width: 80%;
+	height: 150px;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.promotion_bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	background-image: url("/status/Promotion.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.promotion-choices .piece {
+	width: 37px;
+	height: 90px;
+	border-radius: 50px;
+	border: 1px solid var(--light-tiles);
+}
+.promotion-choices .piece:hover {
+	box-shadow: 0 0 0 5px var(--dark-tiles) inset;
+	transform: scale(1.05);
+}
+.promotion-choices :is(.wq, .bq) {
+	left: 10%;
+}
+.promotion-choices :is(.wr, .br) {
+	left: 30%;
+}
+.promotion-choices :is(.wb, .bb) {
+	left: 49%;
+}
+.promotion-choices :is(.wn, .bn) {
+	left: 70%;
+}
+
+.new-game-button {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-top: 20px;
+	cursor: pointer;
+	/* Add more styles as needed */
+}
+/*===============================chess board style======================================*/
+
+/* Ai Board*/
+#myBoard {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin-bottom: 5px;
+	border: none !important;
+}
+
+.highlight-white {
+	box-shadow: inset 0 0 3px 3px yellow;
+}
+
+.highlight-black {
+	box-shadow: inset 0 0 3px 3px blue;
+}
+
+.highlight-hint {
+	box-shadow: inset 0 0 3px 3px red;
+}
+
+.no-outline:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.btn-header {
+	font-size: 20px;
+	font-weight: bold;
+}
+.square-55d63 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.piece-417db {
+	width: 27px !important;
+	height: 38px !important;
+	margin-left: 10px !important;
+	margin-bottom: 5px !important;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.notation-322f9 {
+	visibility: hidden !important;
+}
+.board-b72b1 {
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0;
+	padding: 0;
+	border: none !important;
+	outline: none !important;
+}
+.chessboard-63f37 {
+	width: 100% !important;
+	height: 100% !important;
+	margin: 0;
+	padding: 0;
+	border: none !important;
+	outline: none !important;
+}
+.square-55d63.white-1e1d7 {
+	height: 40px !important;
+	width: 40px !important;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: transparent;
+	/* background-image: url("/game_play/white_layer.png");
+	background-size: contain !important;
+	background-position: center !important; */
+}
+.square-55d63.black-3c85d {
+	height: 40px !important;
+	width: 40px !important;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: transparent;
+	/* background-image: url("/game_play/black_layer.png");
+	background-size: contain;
+	background-position: center !important; */
+}
+.piece-417db {
+	width: 100%;
+	height: 100%;
+	margin-right: 10px;
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	/* .board-b72b1 {
+		width: 500px;
+	}
+	.board-b72b1 .square-55d63 {
+		width: 70px !important;
+		height: 70px !important;
+	}
+	.board-b72b1 .square-55d63 img {
+		width: 70px !important;
+		height: 70px !important;
+	} */
+}
+@media (min-width: 748px) and (max-width: 991px) {
+	/* .board-b72b1 {
+		width: 470px !important;
+	}
+	.board-b72b1 .square-55d63 {
+		width: 50px !important;
+		height: 50px !important;
+	}
+	.board-b72b1 .square-55d63 img {
+		width: 50px !important;
+		height: 50px !important;
+	} */
+}
+
+@media only screen and (max-width: 600px) {
+}
